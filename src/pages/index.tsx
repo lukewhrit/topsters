@@ -4,37 +4,38 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
 
-import { useState } from 'react'
+import { useStore } from '../lib/store';
 import { tw } from 'twind';
 
 export default function Home() {
-  const cols = 5;
-  const rows = 5;
-  const [albums, setAlbums] = useState(new Array(cols * rows).fill('https://via.placeholder.com/300'));
+  const { albums, setAlbum } = useStore();
 
   return (
     <main>
       <section className={tw`grid grid-cols-5 grid-rows-5 gap-1 max-w-xl`}>
-        {new Array(cols * rows).fill(0).map((_, i) => (
-          <div className={tw``} key={i.toString()}>
-            <img
-              src={albums[i]}
-              width={150}
-              id={i.toString()}
-              onClick={(e) => {
-                e.preventDefault();
-                setAlbums(albumsArray => {
-                  return [
-                    albumsArray[i-1],
-                    'https://via.placeholder.com/300/FF0000/FFFFFF',
-                    ...albumsArray
-                  ]
-                })
-              }}
-            />
-          </div>
-        ))}
+        {new Array(5 * 5).fill(0).map((_, i) => {
+          const album = albums[i];
+
+          return (
+            <div key={i.toString()}>
+              <img
+                src={album}
+                width={150}
+                id={i.toString()}
+                onClick={(e) => {
+                  e.preventDefault();
+
+                  if (album === 'https://via.placeholder.com/300/FF0000/FFFFFF') {
+                    setAlbum(i, 'https://via.placeholder.com/300');
+                  } else if (album === 'https://via.placeholder.com/300') {
+                    setAlbum(i, 'https://via.placeholder.com/300/FF0000/FFFFFF');
+                  }
+                }}
+              />
+            </div>
+          );
+        })}
       </section>
     </main>
-  )
+  );
 }
