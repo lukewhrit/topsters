@@ -12,7 +12,7 @@ export default function Home() {
 
   return (
     <main>
-      <section className={tw`grid grid-cols-5 grid-rows-5 gap-1 max-w-xl`}>
+      <section className={tw`grid grid-cols-5 grid-rows-5 gap-1.5 max-w-xl`}>
         {new Array(5 * 5).fill(0).map((_, i) => {
           const album = albums[i];
 
@@ -25,10 +25,11 @@ export default function Home() {
                 onClick={(e) => {
                   e.preventDefault();
 
-                  if (album === 'https://via.placeholder.com/300/FF0000/FFFFFF') {
+                  // Make image in card red when clicked
+                  if (album === 'https://ia803006.us.archive.org/2/items/mbid-67216fc8-4146-44b4-a295-16dfbfe6aff9/mbid-67216fc8-4146-44b4-a295-16dfbfe6aff9-23600164180.jpg') {
                     setAlbum(i, 'https://via.placeholder.com/300');
                   } else if (album === 'https://via.placeholder.com/300') {
-                    setAlbum(i, 'https://via.placeholder.com/300/FF0000/FFFFFF');
+                    setAlbum(i, 'https://ia803006.us.archive.org/2/items/mbid-67216fc8-4146-44b4-a295-16dfbfe6aff9/mbid-67216fc8-4146-44b4-a295-16dfbfe6aff9-23600164180.jpg');
                   }
                 }}
               />
